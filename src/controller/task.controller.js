@@ -3,7 +3,7 @@ export const getTask = async (req, res) => {
   try {
     const connection = await getConnection();
 
-    const response = await connection.query("SELECT * FROM task");
+    const response = await connection.query("SELECT T.id,T.title,T.description,C.title as 'category',T.state FROM task as T INNER JOIN category as C on T.category=C.id");
 
     res.status(200).json(response);
   } catch (error) {
